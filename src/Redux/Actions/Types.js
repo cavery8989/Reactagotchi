@@ -1,0 +1,15 @@
+export const UPDATE_DISPLAY = 'UPDATE_DISPLAY';
+
+// dev actions
+
+export const ADD_TO_LIT_PIXEL_ARRAY = 'ADD_TO_LIT_PIXEL_ARRAY';
+export const REMOVE_FROM_LIT_PIXEL_ARRAY = 'REMOVE_FROM_TO_LIT_PIXEL_ARRAY';
+
+
+// character state actions
+
+export const CHANGE_DIRECTION = 'CHANGE_DIRECTION';
+export const NEXT_ANIMATION_FRAME = 'NEXT_ANIMATION_FRAME';
+
+
+
