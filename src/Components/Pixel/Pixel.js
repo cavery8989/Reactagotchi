@@ -16,16 +16,6 @@ class Pixel extends Component {
     }
   }
 
-  componentDidMount(){
-    let newState = Object.assign({}, this.state);
-    let newStyles = Object.assign({}, this.state.styles);
-    if ( this.props.isOn){
-      newStyles.backgroundColor = '#595959'
-    }
-    newState.styles = newStyles;
-    this.setState(newState);
-  }
-
   LightenPixel(){
     const state = Object.assign({},this.state);
     let styles = Object.assign({}, state.styles);
@@ -44,9 +34,12 @@ class Pixel extends Component {
   }
 
   render(){
+    let styles = this.state.styles;
+    let color = this.props.isOn ? '#595959' : '#f5f5f5';
 
+    styles.backgroundColor = color;
     return (
-      <div onClick={this.LightenPixel.bind(this)} style={this.state.styles}></div>
+      <div onClick={this.LightenPixel.bind(this)} style={styles}></div>
     )
   }
 }

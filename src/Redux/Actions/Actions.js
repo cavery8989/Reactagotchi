@@ -41,16 +41,17 @@ export function setPixelsPerRow (pixelsPerRow) {
 
 // Character Actions
 
-export function setCharacterAnimationFrames(animationFrames) {
+export function setCurrentMonsterBlueprint(blueprint) {
+
   return {
-    action: types.SET_ANIMATION_FRAMES,
-    value: animationFrames
+    type: types.SET_MONSTER_BLUEPRINT,
+    value: blueprint
   }
 }
 
 export function setNewDirection(value) {
   return {
-    action: types.SET_DIRECTION,
+    type: types.SET_DIRECTION,
     value: value
   }
 }

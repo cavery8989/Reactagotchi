@@ -1,4 +1,4 @@
-function moveMonster (displayWidthInPixels ,currentDirection, monsterPixels){
+export function walkMonster (displayWidthInPixels ,currentDirection, monsterPixels){
 
   // store furthest left fo furthest right pixel based on direction.
 
@@ -6,10 +6,10 @@ function moveMonster (displayWidthInPixels ,currentDirection, monsterPixels){
 
   // check to see if it is at the edge switching direction if it is;
   let newDirection = currentDirection;
-  if(currentDirectoon === 'right' && monsterPixels.max() === displayWidthInPixels){
+  if(currentDirection === 'right' && Math.max.apply(null, modulosePixels) + 1 === displayWidthInPixels){
     newDirection = 'left';
   }
-  else if(currentDirection === 'left' && monsterPixels.min() === 0){
+  else if(currentDirection === 'left' && Math.min.apply(null, modulosePixels) === 0){
     newDirection = 'right';
   }
 
@@ -33,4 +33,10 @@ function moveMonster (displayWidthInPixels ,currentDirection, monsterPixels){
     monsterPixels: newPixels
   }
 }
+
+export function animateMonster () {
+
+}
+
+
 
