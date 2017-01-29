@@ -16,3 +16,42 @@ export function removeLitPixel(index) {
   }
 }
 
+// Display Actions
+
+export function updateDisplay(litPixelArray) {
+  return {
+    type: types.UPDATE_DISPLAY,
+    value: litPixelArray
+  }
+}
+
+export function setPixelDensity (pixelDensity) {
+  return {
+    type: types.SET_PIXELS_PIXEL_DENSITY,
+    value: pixelDensity
+  }
+}
+
+export function setPixelsPerRow (pixelsPerRow) {
+  return {
+    type: types.SET_PIXELS_PER_ROW,
+    value: pixelsPerRow
+  }
+}
+
+// Character Actions
+
+export function setCharacterAnimationFrames(animationFrames) {
+  return {
+    action: types.SET_ANIMATION_FRAMES,
+    value: animationFrames
+  }
+}
+
+export function setNewDirection(value) {
+  return {
+    action: types.SET_DIRECTION,
+    value: value
+  }
+}
+

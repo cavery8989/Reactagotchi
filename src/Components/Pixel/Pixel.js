@@ -16,6 +16,16 @@ class Pixel extends Component {
     }
   }
 
+  componentDidMount(){
+    let newState = Object.assign({}, this.state);
+    let newStyles = Object.assign({}, this.state.styles);
+    if ( this.props.isOn){
+      newStyles.backgroundColor = '#595959'
+    }
+    newState.styles = newStyles;
+    this.setState(newState);
+  }
+
   LightenPixel(){
     const state = Object.assign({},this.state);
     let styles = Object.assign({}, state.styles);
