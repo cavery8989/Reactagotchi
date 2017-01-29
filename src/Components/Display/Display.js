@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import { Pixel } from '../Pixel/Pixel';
+import React, {Component} from 'react';
+import Pixel from '../Pixel/Pixel';
 
-export class Display extends Component {
+import { connect } from 'react-redux';
+
+class Display extends Component {
 
   constructor(props) {
     super(props);
@@ -12,17 +14,8 @@ export class Display extends Component {
       margin: '0 auto'
     };
 
-    this.arrayOfOn = [];
   }
 
-  addToArrayOfOn(id){
-    this.arrayOfOn.push(id);
-    console.log(this.arrayOfOn);
-  }
-
-  removeFromArrayOfOn(id){
-    this.arrayOfOn.remove(id);
-  }
   generatePixels() {
 
     var pixelsDensity = 10;
@@ -31,8 +24,10 @@ export class Display extends Component {
     var totalPixels = pixelsPerRow * pixelsPerRow;
     var pixels = [];
 
-    for(var i = 0; i < totalPixels; i++){
-      pixels.push(<Pixel key={i} id={i} addArrayOfOn={this.addToArrayOfOn} removeArrayOfOn={this.removeFromArrayOfOn} dimentions={pixelsDensity}/>)
+    for (var i = 0; i < totalPixels; i++) {
+      pixels.push(<Pixel key={i}
+                         index={i}
+                         dimentions={pixelsDensity}/>)
     }
 
     return pixels;
@@ -42,9 +37,21 @@ export class Display extends Component {
   render() {
     var pixels = this.generatePixels.bind(this)();
     return (
-      <div style={this.styles}>
-        {pixels}
+      <div>
+
+        {this.props.arrayOfOn.join(',')}
+        <div style={this.styles}>
+          {pixels}
+        </div>
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    arrayOfOn: state.devReducer.litPixels
+  }
+}
+
+export default connect(mapStateToProps)(Display);

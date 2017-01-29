@@ -8,3 +8,11 @@ export function addLitPixel(index) {
     value: index
   }
 }
+
+export function removeLitPixel(index) {
+  return {
+    type: types.REMOVE_FROM_LIT_PIXEL_ARRAY,
+    value: index
+  }
+}
+

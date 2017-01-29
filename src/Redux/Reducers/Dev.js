@@ -14,10 +14,14 @@ function DevReducer(initialState, action) {
     newState.litPixels = newPixelArray;
   }
   else if(action.type === types.REMOVE_FROM_LIT_PIXEL_ARRAY){
+
     let newPixelArray = newState.litPixels.slice();
-    newPixelArray = newPixelArray.splice(action.value,1);
+    let index = newPixelArray.indexOf(action.index);
+    newPixelArray.splice(index,1);
     newState.litPixels = newPixelArray;
   }
+
+  return newState;
 }
 
 export default DevReducer;

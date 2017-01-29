@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import * as actions from '../../Redux/Actions/Actions';
+import { connect } from 'react-redux';
 
-export class Pixel extends Component {
+class Pixel extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -15,18 +17,18 @@ export class Pixel extends Component {
   }
 
   LightenPixel(){
-    var state = this.state;
-
+    const state = Object.assign({},this.state);
+    let styles = Object.assign({}, state.styles);
     if(!state.pixelOn) {
-      state.styles.backgroundColor = '#595959';
+      styles.backgroundColor = '#595959';
+      state.styles = styles;
       state.pixelOn = true;
-      this.props.addToArrayOfOn(this.props.id);
+      this.props.addLitPixel(this.props.index);
     }else{
-      state.styles.backgroundColor = '#f5f5f5';
+      styles.backgroundColor = '#f5f5f5';
+      state.styles = styles;
       state.pixelOn = false;
-      this.props.removeFromArrayOfOn(this.props.id);
-
-
+      this.props.removeLitPixel(this.props.index);
     }
     this.setState(state);
   }
@@ -38,3 +40,16 @@ export class Pixel extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addLitPixel: function (index) {
+      dispatch(actions.addLitPixel(index));
+    },
+    removeLitPixel: function (index) {
+      dispatch(actions.removeLitPixel(index))
+    }
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Pixel);
