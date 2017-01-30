@@ -18,9 +18,11 @@ class Pixel extends Component {
 
   LightenPixel(){
     const state = Object.assign({},this.state);
+
     let styles = Object.assign({}, state.styles);
     if(!state.pixelOn) {
       styles.backgroundColor = '#595959';
+
       state.styles = styles;
       state.pixelOn = true;
       this.props.addLitPixel(this.props.index);
@@ -35,7 +37,7 @@ class Pixel extends Component {
 
   render(){
     let styles = this.state.styles;
-    let color = this.props.isOn ? '#595959' : '#f5f5f5';
+    let color = this.props.isOn || this.state.pixelOn? '#595959' : '#f5f5f5';
 
     styles.backgroundColor = color;
     return (

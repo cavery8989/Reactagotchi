@@ -56,3 +56,17 @@ export function setNewDirection(value) {
   }
 }
 
+export function setCurrentPosition (position){
+  return {
+    type: types.SET_CURRENT_POSITION,
+    value: position
+  }
+}
+
+export function setCurrentAnimationFrame (currentFrame) {
+  return {
+    type: types.SET_CURRENT_ANIMATION_FRAME,
+    value: currentFrame
+  }
+}
+

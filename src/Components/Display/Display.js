@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Pixel from '../Pixel/Pixel';
 
-import { walkMonster } from '../../HelperMethods/animation';
+import { walkMonster, animateMonster } from '../../HelperMethods/animation';
 
 import * as actions from '../../Redux/Actions/Actions';
 
@@ -34,7 +34,7 @@ class Display extends Component {
     this.props.setPixelsPerRow(pixelsPerRow);
 
     let currentMonster = monsters.baby;
-    this.props.updateDisplay(currentMonster.framePlots[0]);
+    this.props.updateDisplay(currentMonster.framePlots[1]);
     this.props.setMonsterBlueprint(currentMonster);
 
   }
@@ -44,7 +44,7 @@ class Display extends Component {
     drawTimer = setInterval(() => {
       this.runGameLoop()
     },1000);
-    //this.runGameLoop();
+
   }
 
   generatePixels() {
@@ -65,14 +65,27 @@ class Display extends Component {
   }
 
   runGameLoop() {
-
-    console.log('helloooo');
     const pixelsPerRow = this.props.pixelsPerRow;
     const currentDisplay = this.props.litPixelIndexArray;
     const direction = this.props.monster.currentDirection;
-    console.log('yoooo');
-    console.log(pixelsPerRow);
-    const newDirectionAndPixels = walkMonster(pixelsPerRow,direction,currentDisplay);
+
+    const currentPosition = this.props.monster.position;
+    const currentAnimationFrame = this.props.monster.currentAnimationFrame;
+    const nextFrameBase = this.props.monster.monsterBlueprint.framePlots[currentAnimationFrame];
+
+    const nextFrame = animateMonster(currentPosition, nextFrameBase);
+
+    const newDirectionAndPixels = walkMonster(pixelsPerRow,direction,nextFrame);
+
+    const newPosition = newDirectionAndPixels.direction === 'right'? currentPosition + 1 : currentPosition - 1;
+    this.props.setMonsterPosition(newPosition);
+
+    const newFrameNumber = currentAnimationFrame < this.props.monster.monsterBlueprint.totalFrames ? currentAnimationFrame + 1 : 0;
+    this.props.setCurrentAnimationFrame(newFrameNumber);
+    // todo: set frame nuber then write animation function;
+
+
+
     this.props.updateDisplay(newDirectionAndPixels.monsterPixels);
     this.props.setMonsterDirection(newDirectionAndPixels.direction);
 
@@ -85,10 +98,8 @@ class Display extends Component {
   render() {
     console.log('rendering');
     var pixels = this.generatePixels.bind(this)();
-
     return (
       <div>
-
         {this.props.arrayOfOn.join(',')}
         <div style={this.styles}>
           {pixels}
@@ -131,6 +142,12 @@ function mapDispatchToProps(dispatch) {
     },
     setMonsterDirection: function (direction){
       dispatch(actions.setNewDirection(direction));
+    },
+    setMonsterPosition: function (position) {
+      dispatch(actions.setCurrentPosition(position));
+    },
+    setCurrentAnimationFrame: function (newFrame) {
+      dispatch(actions.setCurrentAnimationFrame(newFrame));
     }
   }
 }

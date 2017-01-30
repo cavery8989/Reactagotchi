@@ -19,6 +19,12 @@ export default function characterReducer (initialState, action){
   else if (action.type === types.SET_MONSTER_BLUEPRINT){
     newState.currentMonsterBlueprint = action.value;
   }
+  else if (action.type === types.SET_CURRENT_POSITION){
+    newState.position = action.value;
+  }
+  else if (action.type === types.SET_CURRENT_ANIMATION_FRAME){
+    newState.currentAnimationFrame = action.value;
+  }
 
   return newState
 }
