@@ -43,7 +43,7 @@ class Display extends Component {
 
     drawTimer = setInterval(() => {
       this.runGameLoop()
-    },1000);
+    },100);
 
   }
 
